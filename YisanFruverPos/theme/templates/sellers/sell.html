@@ -1,0 +1,72 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<div class="flex space-x-20">
+  <div class="w-8/12">
+    <div
+      class="block w-full text-center py-2 my-4 bg-yellow-400 text-shadow-white text-xl border-4 border-black rounded-md shadow-lg shadow-black">
+      <p>Productos</p>
+    </div>
+
+    <div class="block flex justify-between w-full text-center my-4">
+      <input id='search' class="rounded-md w-full" type="text" placeholder="Buscar...">
+    </div>
+
+    <div class='w-full'>
+
+      <table id='info'
+        class="table-auto flex-row content-center min-w-full bg-transparent-white border-2 border-black rounded-md">
+        <thead>
+          <tr class="bg-sky-500 border-2 border-black mb-3">
+            <th class="text-white text-shadow py-2">Producto</th>
+            <th class="text-white text-shadow">Precio</th>
+            <th class="text-white text-shadow">Cantidad</th>
+            <th class="text-white text-shadow"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <form action="{% url 'sellers:add' product.id%}" method="POST">
+            {% csrf_token %}
+            <tr class="flex-row text-center">
+              <td class="max-h-10 name-product">{{product}}</td>
+              <td class="">{{product.price}}</td>
+              <td class="w-1/5"> <input id='amount' class="rounded-md w-3/5" type="text" placeholder="cantidad"
+                  name="value">
+              </td>
+              <td class="mx-auto">
+                <input
+                  class="cursor-pointer bg-sky-500 text-white text-shadow px-3 py-2 rounded-md text-shadow text-lg border-2 border-black hover:bg-yellow-400"
+                  type="submit" value="Agregar">
+              </td>
+            </tr>
+          </form>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+  <div class="w-5/12">
+    <div
+      class="block w-full text-center py-2 my-4 bg-yellow-400 text-shadow-white text-xl border-4 border-black rounded-md shadow-lg shadow-black">
+      <p>Factura</p>
+    </div>
+    <div class="block w-full text-center py-2 my-4">
+      {% include '../purchases/purchase.html' %}
+    </div>
+    <div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/sell.js' %}">
+</script>
+
+{% endblock%}
+
+<a href="{% url 'sellers:add' product.id product.id %}"
+  class="bg-sky-500 text-white text-shadow px-3 py-2 rounded-md text-shadow text-lg border-2 border-black hover:bg-yellow-400"
+  aria-current="page">Agregar</a>

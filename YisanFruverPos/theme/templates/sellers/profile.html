@@ -1,0 +1,30 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<div class="flex space-x-20">
+    <div class="w-1/4">
+        <div class="flex justify-center">
+            {% if user.first_name and user.last_name %}
+            <p class="block w-full text-center py-2 my-4 bg-yellow-400 text-shadow-white text-xl border-4 border-black rounded-md shadow-lg shadow-black" >{{user.first_name}} {{user.last_name}}</p>
+            {% else %}
+            <p class="block w-full text-center py-2 my-4 bg-yellow-400 text-shadow-white text-xl border-4 border-black rounded-md shadow-lg shadow-black" >{{user.username}}</p>
+            {% endif %}
+
+        </div>
+        <div class="border-4 border-black rounded-md">
+            <img class="block shadow-lg shadow-black" src="{% static 'img/default-user.png' %}" alt="">
+        </div> 
+        
+    </div>
+    <div class="w-3/4">
+        <div class="block w-full text-center py-2 my-4 bg-yellow-400 text-shadow-white text-xl border-4 border-black rounded-md shadow-lg shadow-black">
+            <p>Ventas</p>
+        </div>
+        <div class="opacity-80 block w-full text-right py-2 my-4 bg-sky-500 text-shadow text-white text-7xl border-4 border-black rounded-md shadow-lg shadow-black">
+            <p class="mr-10 py-20 opacity-100">{{sales}}</p>
+        </div>
+        
+    </div>
+</div>
+{% endblock%}

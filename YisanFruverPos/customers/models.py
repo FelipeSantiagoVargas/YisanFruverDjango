@@ -6,6 +6,7 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=50, blank=False, null=False)
     document_number= models.CharField(max_length=20, blank=False, null=False, unique=True)
     email= models.EmailField(blank=False, null=False)
+    address = models.CharField(max_length=50,blank=False, null=False)
     phone_number= models.CharField(max_length=20, blank=False, null=False)
     
     

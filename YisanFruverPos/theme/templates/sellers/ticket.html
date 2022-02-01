@@ -1,0 +1,93 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/dist/main.css' %}">
+    <title>Ticket</title>
+</head>
+
+
+
+<body>
+    <div  style="max-width: 280px;">
+        <div class="w-280">
+            <div class="w-280">
+                <img class="w-280" src="{% static 'img/LogoYisan.jpg'%}" style="width: 280px;" alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <h2 class="text-center font-bold text-lg">Ticket No. {{bill.sale.id}}</h2>
+                <p class="text-center">Doralba Cardenas Naranjo</p>
+                <p class="text-center">C.C 24049772</p>
+                <p class="text-center">Calle 16 # 12-26</p>
+                <p class="text-center">{{bill.sale.created}}</p>
+            </div>
+        </div>
+        <hr class="mt-2 mb-2">
+        <div>
+            <div class="flex-column">
+                <p> <strong>Cliente:</strong>  {{bill.customer}}</p>
+                <p><strong>NIT/CC:</strong> {{bill.customer.document_number}}</p>
+                <p><strong>DIR:</strong> {{bill.customer}}</p>
+            </div>
+        </div>
+        <hr class="mt-2 mb-2">
+        <div>
+            <div>
+                <table class="text-center w-full">
+                    <thead class="text-center">
+                        <tr class="flex-row text-center">
+                            <th class="text-center">Producto</th>
+                            <th class="">Precio</th>
+                            <th class="">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for value in bill.items %}
+                        <tr class="flex-row text-center">
+                            <td class="">{{value.1.product_name}}</td>
+                            <td class="">{{value.1.price}}</td>
+                            <td class="">{{value.1.amount}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr class="mb-2">
+                <div class="flex-column content-end justify-items-end justify-self-end items-end">
+                    <p class='ml-28 text-left'><strong class="mr-9">Total:</strong> {{bill.total}}</p> 
+                    <p class='ml-28 text-left'><strong class="mr-3.5">Cancelo:</strong> {{value}}</p>
+                    <p class='ml-28 text-left'><strong class="mr-4">Cambio:</strong> {{change}}</p>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-2 mb-2">
+        <div>
+            <div class="flex-column">
+                <p><strong>Cajero:</strong> {{user.first_name}} {{user.last_name}}</p>
+                <p><strong>Caja:</strong> #1</p>
+                <p><strong>Observacion:</strong> N/A</p>
+            </div>
+        </div>
+        <hr class="mt-2 mb-2">
+        <div><h2 class="text-center font-bold text-4xl">Gracias por tu compra!!!</h2></div>
+    </div>
+    <script>
+        document.onkeydown = function (e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla == 116) {
+                if (confirm("Esta pagina no se puede actualizar") == true) {
+                    return false;
+                } else {
+                    return false;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
